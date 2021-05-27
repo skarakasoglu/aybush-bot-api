@@ -1,0 +1,22 @@
+version: '3.2'
+services:
+  aybush_api:
+    container_name: AybushBotApi
+    build: .
+    image: "skarakasoglu/aybush-bot-api:1.0.0"
+    restart: always
+    environment:
+      executablePath: bin
+      executableName: AybushBotApi
+      applicationName: "Aybush Bot Api"
+      dbIpAddress: 1.2.3.4
+      dbPort: 5432
+      dbUsername: username
+      dbPassword: password
+      dbName: db
+      certFile: /path/to/ssl/certificate/file
+      keyFile: /path/to/ssl/private/key/file
+      GIN_MODE: debug
+      ENVIRONMENT: test
+    ports:
+    - "8080:443"
