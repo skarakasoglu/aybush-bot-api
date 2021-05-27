@@ -33,8 +33,6 @@ func init() {
 }
 
 func main() {
-	log.Println(dbHost)
-
 	db, err := data.NewDB(data.DatabaseCredentials{
 		Host:         dbHost,
 		Port:         dbPort,
