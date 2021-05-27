@@ -11,7 +11,7 @@ WORKDIR /go/src/github.com/skarakasoglu/aybush-bot-api/
 ADD --chown=aybush:aybush . /go/src/github.com/skarakasoglu/aybush-bot-api/
 
 #Give the owner to execute the run.sh shell script.
-RUN chown aybush:aybush /go/src/github.com/skarakasoglu/aybush-bot-api/
+RUN chown aybush:aybush /go/src/github.com/skarakasoglu/aybush-bot-api/ && chmod 744 run.sh
 
 #Log in as aybush.
 #USER aybush
