@@ -13,6 +13,7 @@ type DiscordService struct{
 func (d DiscordService) GetTopNDiscordMemberLevels(n int) ([]models.DiscordMemberLevel, error) {
 	query := `
 			SELECT dml.id, dm.avatar_url, dm.username, dm.discriminator, dml.experience_points, dml.last_message_timestamp, dm.member_id, dm.guild_id,
+			dml.message_count, dm.active_voice_minutes,
 			cdl.id "current_level",  cdl.required_experience_points "current_level_required", cdl.maximum_experience_points "current_level_maximum", 
 			cdr.id "current_role_id", cdr.role_id "current_role_role_id", cdr.name "current_role_name",
 			ndl.id "next_level", ndl.required_experience_points "next_level_required", ndl.maximum_experience_points "next_level_maximum",
@@ -41,7 +42,8 @@ func (d DiscordService) GetTopNDiscordMemberLevels(n int) ([]models.DiscordMembe
 		var currentLevel models.DiscordLevel
 		var nextLevel models.DiscordLevel
 
-		err = rows.Scan(&memberLevel.Id, &member.AvatarUrl, &member.Username, &member.Discriminator, &memberLevel.ExperiencePoints, &memberLevel.LastMessageTimestamp, &member.MemberId,
+		err = rows.Scan(&memberLevel.Id, &member.AvatarUrl, &member.Username, &member.Discriminator,
+			&memberLevel.MessageCount, &memberLevel.ActiveVoiceMinutes, &memberLevel.ExperiencePoints, &memberLevel.LastMessageTimestamp, &member.MemberId,
 			&member.GuildId, &currentLevel.Id, &currentLevel.RequiredExperiencePoints, &currentLevel.MaximumExperiencePoints,
 			&currentLevel.DiscordRole.Id, &currentLevel.DiscordRole.RoleId, &currentLevel.DiscordRole.Name,
 			&nextLevel.Id, &nextLevel.RequiredExperiencePoints, &nextLevel.MaximumExperiencePoints,
