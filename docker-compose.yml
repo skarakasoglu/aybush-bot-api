@@ -3,7 +3,7 @@ services:
   aybush_api:
     container_name: AybushBotApi
     build: .
-    image: "skarakasoglu/aybush-bot-api:1.0.0"
+    image: skarakasoglu/aybush-bot-api:1.0.0
     restart: always
     environment:
       executablePath: bin
