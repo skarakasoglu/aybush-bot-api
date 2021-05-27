@@ -32,11 +32,12 @@ func (srv *server) Start() error {
 		v1.GET("/leaderboard", apiv1.getLeaderboard)
 	}
 
-	err := router.RunTLS(":443", srv.certFile, srv.keyFile)
-	if err != nil {
-		log.Printf("Error on running the router: %v", err)
-		return err
-	}
+	go func() {
+		err := router.RunTLS(":443", srv.certFile, srv.keyFile)
+		if err != nil {
+			log.Printf("Error on running the router: %v", err)
+		}
+	}()
 
 	return nil
 }
