@@ -29,7 +29,8 @@ func (srv *server) Start() error {
 
 	v1 := router.Group("/v1")
 	{
-		v1.GET("/leaderboard", apiv1.getLeaderboard)
+		v1.GET("/leaderboard", apiv1.getLeaderboardByEpisode)
+		v1.GET("/episode", apiv1.getActiveEpisodes)
 	}
 
 	go func() {
